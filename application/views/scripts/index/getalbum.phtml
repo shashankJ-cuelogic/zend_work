@@ -1,0 +1,49 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Zend Framework Tutorial');
+echo $this->doctype();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headTitle(); ?>
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl() . '/css/site.css'); ?>
+    </head>
+
+    <body>
+        <?php
+        $this->title = "My Albums";
+        $this->headTitle($this->title);
+        ?>
+        <p><a href="<?php echo $this->url(array('controller' => 'Index',
+            'action' => 'add'));
+        ?>">Add new album</a></p>
+        <table class="imagetable">
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th colspan="2">Action</th>
+            </tr>
+            
+<?php foreach ($this->album as $album) : ?>
+                <tr>
+                    <td><?php echo $this->escape($album->title); ?></td>
+                    <td><?php echo $this->escape($album->artist); ?></td>
+                    <td>
+                       
+                        <a href="<?php echo $this->url(array('controller' => 'Index',
+        'action' => 'update', 'id' => $album->id));
+    ?>">Edit</a>
+                    </td>
+                    <td>
+                        
+                        <a href="<?php echo $this->url(array('controller' => 'Index',
+        'action' => 'delete', 'id' => $album->id));
+    ?>">Delete</a>
+                    </td>
+                </tr>
+<?php endforeach; ?>
+        </table>
+    </body>
+</html>
